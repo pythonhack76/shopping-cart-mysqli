@@ -18,12 +18,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $name = $input_name;
     }
     
+       // Count total files
+       $countfiles = count($_FILES['files']['name']);
     // Validate address
-    $input_address = trim($_POST["address"]);
+    $input_image = trim($_POST["image"]);
     if(empty($input_address)){
-        $address_err = "Please enter an address.";     
+        $image_err = "Please enter an address.";     
     } else{
-        $address = $input_address;
+        $image = $input_image;
     }
     
     // Validate salary
@@ -51,6 +53,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_name = $name;
             $param_image = $image;
             $param_price = $price;
+
+            
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -75,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Record</title>
+    <title>Inserisci Prodotto</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .wrapper{
@@ -91,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="col-md-12">
                     <h2 class="mt-5">Inserisci Prodotto:</h2>
                     <p>Please fill this form and submit to add employee record to the database.</p>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Prodotto</label>
                             <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
@@ -99,16 +103,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="form-group">
                             <label>Immagine</label>
-                            <textarea name="image" class="form-control <?php echo (!empty($image_err)) ? 'is-invalid' : ''; ?>"><?php echo $address; ?></textarea>
+                            <input type="file" name="files[]" multiple class="form-control <?php echo (!empty($image_err)) ? 'is-invalid' : ''; ?>"><?php echo $image; ?></input>
                             <span class="invalid-feedback"><?php echo $image_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Prezzo</label>
-                            <input type="text" name="price" class="form-control <?php echo (!empty($price_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $salary; ?>">
+                            <input type="text" name="price" class="form-control <?php echo (!empty($price_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $price; ?>">
                             <span class="invalid-feedback"><?php echo $price_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <a href="index.php" class="btn btn-secondary ml-2">Cancella</a>
                     </form>
                 </div>
             </div>        
