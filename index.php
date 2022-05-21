@@ -20,6 +20,27 @@ require_once ('connection.php');
 
 <div class="container">
     <div class="row">
+       
+<?php 
+
+    $sql = "SELECT * FROM products";
+    $result = mysqli_query($con, $sql);
+    while($row = mysqli_fetch_assoc($result)) {
+      
+        echo $row['id'] . " " . $row['name']."<br>"; 
+    }
+    if(!$result){
+        echo "Nessuno risultato disponibile"; 
+    }
+
+?>
+     <div class="col-md-3">
+            <img src="<?php echo $row['image']; ?>" alt="">
+            <h3><?php echo $row['name']; ?></h3>
+            <h6><?php echo $row['price']; ?></h6>
+        </div>
+
+
 
     </div>
 </div>

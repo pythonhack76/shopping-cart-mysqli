@@ -4,13 +4,13 @@
 $username = "root";
 $password = "root";
 $servername = "localhost";
-$dbname = "";
+$dbname = "ecommerce-dress";
 
 
 //creo la connessione 
 $con = mysqli_connect($servername, $username, $password, $dbname);
 //controllo la connessione
-if(!$conn){
+if(!$con){
     die ("Errore con la connessione: " . mysqli_connect_error());
 }
 
